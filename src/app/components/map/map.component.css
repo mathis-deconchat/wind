@@ -1,0 +1,13 @@
+.mapboxgl-map {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.75rem;
+}
+
+.wind-rose-container {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}

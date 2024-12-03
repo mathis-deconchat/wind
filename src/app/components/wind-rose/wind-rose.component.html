@@ -1,0 +1,9 @@
+@if (config.showDot) {
+<div class="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2">
+  <div class="h-[20px] w-[20px] rounded-full bg-red-600/90 shadow-lg"></div>
+</div>
+} @else {
+<div class="h-[200px] w-[200px]">
+  <div echarts [options]="chartOption" class="h-full w-full"></div>
+</div>
+}

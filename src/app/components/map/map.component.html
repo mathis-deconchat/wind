@@ -1,0 +1,78 @@
+<div
+  class="flex h-[calc(100vh-12rem)] w-full overflow-hidden rounded-xl border border-gray-700/50"
+>
+  <div
+    class="flex h-full w-1/6 bg-gray-800/95 border-r border-gray-700/50 backdrop-blur-sm"
+  >
+    <app-map-control
+      [zoom]="mapState.zoom"
+      [windRoseCount]="windRoseIndices.length"
+      [showDirectionLines]="mapState.showDirectionLines"
+      [showCoordinates]="mapState.showCoordinates"
+      (resetView)="resetView()"
+      (toggleWindRose)="toggleWindRose()"
+      (addWindRose)="addWindRose()"
+      (showDirectionLinesChange)="toggleDirectionLines($event)"
+      (showCoordinatesChange)="toggleCoordinates($event)"
+    ></app-map-control>
+  </div>
+  <div #mapContainer class="relative flex h-full w-full">
+    <!-- Control bar -->
+
+    <div #map class="absolute inset-0"></div>
+
+    @for (index of windRoseIndices; track index) {
+    <div #windRoseContainer class="wind-rose-container">
+      <app-wind-rose [zoom]="mapState.zoom"></app-wind-rose>
+    </div>
+    } @if (mapState.showDirectionLines) {
+    <app-wind-direction-lines
+      [mousePosition]="mapState.pointerPosition"
+      [chartPositions]="chartPositions"
+      [containerWidth]="containerDimensions.width"
+      [containerHeight]="containerDimensions.height"
+    ></app-wind-direction-lines>
+    }
+
+    <div class="absolute left-4 top-4 z-10 flex flex-col gap-2">
+      @for (location of locations; track location.name) {
+      <button
+        (click)="goToLocation(location)"
+        class="flex w-48 items-center gap-2 rounded-lg border border-gray-700/50 bg-gray-900/90 px-4 py-2 text-sm text-white backdrop-blur-sm transition-colors duration-200 hover:bg-gray-800/90"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-4 w-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+          />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+          />
+        </svg>
+        {{ location.name }}
+      </button>
+      }
+    </div>
+
+    @if (mapState.showCoordinates && mapState.isPointerVisible) {
+    <app-coordinate-pointer
+      [style.left.px]="mapState.pointerPosition.x"
+      [style.top.px]="mapState.pointerPosition.y"
+      [lng]="mapState.lng"
+      [lat]="mapState.lat"
+    >
+    </app-coordinate-pointer>
+    }
+  </div>
+</div>

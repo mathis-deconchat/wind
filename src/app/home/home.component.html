@@ -1,0 +1,41 @@
+<div class="min-h-screen bg-gray-900">
+  <header class="bg-gray-800/50 backdrop-blur-sm border-b border-gray-700/50">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-6">
+        <h1
+          class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-purple-300"
+        >
+          Wind Analysis Dashboard
+        </h1>
+
+        <div class="flex space-x-2">
+          @for (tab of [ViewTab.Map, ViewTab.Rose]; track tab) {
+          <button
+            (click)="setActiveTab(tab)"
+            [class]="
+              activeTab === tab
+                ? 'bg-indigo-600 text-white'
+                : 'bg-gray-700 text-gray-300'
+            "
+            class="px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 hover:text-white hover:bg-indigo-500"
+          >
+            {{ tab === ViewTab.Map ? "Map View" : "Wind Rose" }}
+          </button>
+          }
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    @switch (activeTab) { @case (ViewTab.Map) {
+    <app-map></app-map>
+    } @case (ViewTab.Rose) {
+    <div
+      class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700/50"
+    >
+      <app-wind-rose></app-wind-rose>
+    </div>
+    } }
+  </main>
+</div>

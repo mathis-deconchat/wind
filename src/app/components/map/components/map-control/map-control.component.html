@@ -1,0 +1,68 @@
+<div class="flex flex-col items-center w-full p-4 gap-6">
+  <div class="flex flex-col items-center gap-2">
+    <span class="text-lg font-mono text-gray-200">Map Controls</span>
+    <div class="h-px w-16 bg-gray-700/50"></div>
+    <span class="text-sm text-gray-400"
+      >Current roses: {{ windRoseCount }}</span
+    >
+  </div>
+
+  <div class="flex flex-col w-full gap-3">
+    <button
+      (click)="resetView.emit()"
+      class="w-full rounded-lg bg-gray-700/50 px-4 py-2 text-sm font-medium text-gray-200 transition-all hover:bg-gray-600/50 active:scale-95 flex items-center justify-center gap-2"
+    >
+      Reset View
+    </button>
+    <button
+      (click)="toggleWindRose.emit()"
+      class="w-full rounded-lg bg-gray-700/50 px-4 py-2 text-sm font-medium text-gray-200 transition-all hover:bg-gray-600/50 active:scale-95 flex items-center justify-center gap-2"
+    >
+      Toggle Wind Rose
+    </button>
+    <button
+      (click)="addWindRose.emit()"
+      class="w-full rounded-lg bg-gray-700/50 px-4 py-2 text-sm font-medium text-gray-200 transition-all hover:bg-gray-600/50 active:scale-95 flex items-center justify-center gap-2"
+    >
+      Add Wind Rose
+    </button>
+  </div>
+
+  <div class="flex flex-col w-full gap-4 p-4 bg-gray-700/30 rounded-lg">
+    <div class="flex items-center justify-between">
+      <span class="text-sm text-gray-300">Direction Lines</span>
+      <label class="relative inline-flex items-center cursor-pointer">
+        <input
+          type="checkbox"
+          [ngModel]="showDirectionLines"
+          (ngModelChange)="showDirectionLinesChange.emit($event)"
+          class="sr-only peer"
+        />
+        <div
+          class="w-9 h-5 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600"
+        ></div>
+      </label>
+    </div>
+
+    <div class="flex items-center justify-between">
+      <span class="text-sm text-gray-300">Show Coordinates</span>
+      <label class="relative inline-flex items-center cursor-pointer">
+        <input
+          type="checkbox"
+          [ngModel]="showCoordinates"
+          (ngModelChange)="showCoordinatesChange.emit($event)"
+          class="sr-only peer"
+        />
+        <div
+          class="w-9 h-5 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600"
+        ></div>
+      </label>
+    </div>
+  </div>
+
+  <div
+    class="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-700/30 text-gray-300"
+  >
+    <span class="text-sm">Zoom: {{ zoom }}</span>
+  </div>
+</div>
