@@ -43,7 +43,6 @@ export class WindRoseComponent implements OnInit, OnChanges {
       const data = processWindData(this.windData, 36);
       this.chartOption = createChartOptions(data, {
         indicators: 36,
-
         maxSpeed: 50,
         radius: '85%',
         splitNumber: 6,
